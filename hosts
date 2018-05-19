@@ -1,0 +1,5 @@
+[odroid1]
+home.kaliwe.ru
+
+[odroid1:vars]
+ansible_ssh_port=20122
