@@ -1,5 +1,13 @@
 [odroid1]
-home.kaliwe.ru
+#home.kaliwe.ru
+192.168.20.1
 
 [odroid1:vars]
-ansible_ssh_port=20122
+#ansible_ssh_port=20122
+
+[odroid2]
+#home.kaliwe.ru
+192.168.20.2
+
+[odroid2:vars]
+#ansible_ssh_port=20222

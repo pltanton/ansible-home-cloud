@@ -1,0 +1,23 @@
+---
+- name: Install nextcloud-db in docker
+  docker_container:
+    name: nextcloud-db
+    image: postgres
+    restart: yes
+    env: "{{ env }}"
+    volumes:
+    - "/media/data/nextcloud/db:/var/lib/postgresql/data"
+
+- name: Install nextcloud in docker
+  docker_container:
+    name: nextcloud
+    image: lsioarmhf/nextcloud
+    restart: yes
+    ports:
+    - "443:443"
+    - "80:80"
+    volumes:
+    - "/media/data/nextcloud/data:/data"
+    - "/media/data/nextcloud/config:/config"
+    links:
+    - nextcloud-db

@@ -2,4 +2,16 @@
   user: root
   roles: 
   - common
+
+- hosts: odroid1
+  roles:
   - home-assistant
+  - nginxproxy
+  tasks:
+  - hostname: { name: ordoir1 }
+
+- hosts: odroid2
+  roles:
+  - nextcloud
+  tasks:
+  - hostname: { name: ordoir2 }
