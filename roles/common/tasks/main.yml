@@ -26,6 +26,7 @@
     - docker.io
     - python-setuptools
     - python-pip
+    - ssl-cert
     state: latest
     update_cache: yes
 

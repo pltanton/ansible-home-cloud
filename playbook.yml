@@ -6,12 +6,42 @@
 - hosts: odroid1
   roles:
   - home-assistant
-  - nginxproxy
+  - hispanico.letsencrypt-nginx-revproxy
   tasks:
-  - hostname: { name: ordoir1 }
+  - hostname: { name: odroid1 }
+  vars:
+    nginx_revproxy_sites:
+      default:
+        ssl: false
+        letsencrypt: false
+      hass.kaliwe.ru:
+        domains:
+        - hass.kaliwe.ru
+        upstreams:
+        - { backend_address: 127.0.0.1, backend_port: 8123 }
+        letsencrypt: true
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
+      nextcloud.kaliwe.ru:
+        domains:
+        - nextcloud.kaliwe.ru
+        upstreams:
+        - { backend_address: 192.168.20.2, backend_port: 80 }
+        letsencrypt: true
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
+      home.kaliwe.ru:
+        domains:
+        - home.kaliwe.ru
+        upstreams:
+        - { backend_address: 192.168.88.1, backend_port: 80 }
+        letsencrypt: true
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
+  
 
 - hosts: odroid2
   roles:
   - nextcloud
   tasks:
-  - hostname: { name: ordoir2 }
+  - hostname: { name: odroid2 }
