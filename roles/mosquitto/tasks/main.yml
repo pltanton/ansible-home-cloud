@@ -1,0 +1,36 @@
+---
+
+- name: Install nginx site for letsencrypt requests for mosquitto
+  template:
+    src: templates/mosquitto-acme.j2
+    dest: /etc/nginx/sites-enabled/mosquitto-acme
+  vars:
+    domain_name: "mqtt.kaliwe.ru"
+
+- name: Restart nginx
+  service: name=nginx state=restarted
+
+- name: Create letsencrypt certificate for mosquitto
+  shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru
+  args:
+    creates: /etc/letsencrypt/live/mqtt.kaliwe.ru
+
+- name: Add letsencrypt cronjob for cert renewal for mosquitto
+  cron:
+    name: letsencrypt_renewal
+    special_time: weekly
+    job: letsencrypt --renew certonly -n --webroot -w /var/www/letsencrypt -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru && service nginx reload
+
+- name: Install mosquitto
+  apt: 
+    package: mosquitto
+    state: latest
+    update_cache: yes
+
+- name: Configure mosquitto
+  template:
+    src: templates/mosquitto.conf.j2
+    dest: /etc/mosquitto/mosquitto.conf
+
+- name: Restart mosquitto
+  service: name=mosquitto state=restarted

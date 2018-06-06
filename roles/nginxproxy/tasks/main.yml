@@ -48,6 +48,16 @@
     to_addr: "{{ item.to }}"
   with_items: "{{ proxies }}"
 
+- name: Install simple proxies
+  template:
+    src: templates/nginx-simple-proxy.j2
+    dest: /etc/nginx/sites-enabled/{{ item.from }}-{{ item.from_port }}-simple-proxy
+  vars:
+    from_addr: "{{ item.from }}"
+    from_port: "{{ item.from_port }}"
+    to_addr: "{{ item.to }}"
+  with_items: "{{ simple_proxies }}"
+
 - name: Reload nginx to activate specified site
   service: name=nginx state=restarted
 

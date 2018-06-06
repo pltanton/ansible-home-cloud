@@ -5,13 +5,14 @@
 
 - hosts: odroid1
   roles:
+  - mosquitto
   - home-assistant
   - nginxproxy
   tasks:
-  - hostname: { name: ordoir1 }
+  - hostname: { name: odroid1 }
 
 - hosts: odroid2
   roles:
   - nextcloud
   tasks:
-  - hostname: { name: ordoir2 }
+  - hostname: { name: odroid2 }
