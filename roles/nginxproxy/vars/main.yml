@@ -1,6 +1,0 @@
-proxies:
-- { email: plotnikovanton@gmail.com, to: "http://127.0.0.1:8123", from: hass.kaliwe.ru }
-- { email: plotnikovanton@gmail.com, to: "http://192.168.88.1:80", from: home.kaliwe.ru }
-- { email: plotnikovanton@gmail.com, to: "https://192.168.20.2", from: nextcloud.kaliwe.ru }
-simple_proxies:
-- { to: "http://192.168.20.2:1883", from: owntracks.kaliwe.ru, from_port: "1883" }
