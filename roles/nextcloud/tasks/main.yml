@@ -1,4 +1,9 @@
 ---
+- name: Copy nginx configuration to remote
+  template:
+    src: files/nginx.conf
+    dest: /media/data/nextcloud/config/nginx.conf
+
 - name: Install nextcloud-db in docker
   docker_container:
     name: nextcloud-db
@@ -11,13 +16,25 @@
 - name: Install nextcloud in docker
   docker_container:
     name: nextcloud
-    image: lsioarmhf/nextcloud
+    image: arm32v7/nextcloud:fpm
     restart: yes
-    ports:
-    - "443:443"
-    - "80:80"
     volumes:
-    - "/media/data/nextcloud/data:/data"
-    - "/media/data/nextcloud/config:/config"
+    - "/media/data/nextcloud:/var/www/html"
     links:
     - nextcloud-db
+    env: "{{ env }}"
+
+- name: Install nextcloud-nginx in docker
+  docker_container:
+    name: nextcloud-nginx
+    image: arm32v7/nginx
+    restart: yes
+    ports:
+    - "8080:80"
+    volumes:
+    - "/media/data/nextcloud/config/nginx.conf:/etc/nginx/nginx.conf:ro"
+    volumes_from:
+    - nextcloud
+    links:
+    - nextcloud
+    #env: "{{ env }}"

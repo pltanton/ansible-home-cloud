@@ -2,3 +2,4 @@ env:
   POSTGRES_PASSWORD: insecure
   POSTGRES_DB: nextcloud
   POSTGRES_USER: nextcloud
+  POSTGRES_HOST: nextcloud-db

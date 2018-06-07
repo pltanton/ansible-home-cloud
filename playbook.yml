@@ -5,7 +5,7 @@
 
 - hosts: odroid1
   roles:
-  - mosquitto
+  # - mosquitto
   - home-assistant
   - hispanico.letsencrypt-nginx-revproxy
   tasks:
@@ -27,7 +27,7 @@
         domains:
         - nextcloud.kaliwe.ru
         upstreams:
-        - { backend_address: 192.168.20.2, backend_port: 80 }
+        - { backend_address: 192.168.20.2, backend_port: 8080 }
         letsencrypt: true
         ssl: false
         letsencrypt_email: "plotnikovanton@gmail.com"
