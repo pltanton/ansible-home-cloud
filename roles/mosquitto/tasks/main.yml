@@ -19,7 +19,7 @@
   cron:
     name: letsencrypt_renewal
     special_time: weekly
-    job: letsencrypt --renew certonly -n --webroot -w /var/www/letsencrypt -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru && service nginx reload
+    job: letsencrypt --renew certonly -n --webroot -w /var/www/letsencrypt -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru && systemctl restart mosquitto
 
 - name: Install mosquitto
   apt: 

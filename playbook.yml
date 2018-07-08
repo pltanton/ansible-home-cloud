@@ -5,7 +5,7 @@
 
 - hosts: odroid1
   roles:
-  # - mosquitto
+  - mosquitto
   - home-assistant
   - hispanico.letsencrypt-nginx-revproxy
   tasks:
@@ -31,6 +31,14 @@
         letsencrypt: true
         ssl: false
         letsencrypt_email: "plotnikovanton@gmail.com"
+      archive.kaliwe.ru:
+        domains:
+        - archive.kaliwe.ru
+        upstreams:
+        - { backend_address: 192.168.20.2, backend_port: 40197 }
+        letsencrypt: true
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
       home.kaliwe.ru:
         domains:
         - home.kaliwe.ru
@@ -43,5 +51,8 @@
 - hosts: odroid2
   roles:
   - nextcloud
+  - rtmp
+  - filebrowser
+    #- owntracks-recorder
   tasks:
   - hostname: { name: odroid2 }

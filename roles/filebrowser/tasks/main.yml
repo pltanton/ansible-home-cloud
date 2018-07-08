@@ -1,0 +1,20 @@
+---
+
+- name: Install filebrowser binary
+  unarchive:
+    src: https://github.com/filebrowser/filebrowser/releases/download/v1.7.0/linux-arm-filebrowser.tar.gz
+    dest: /usr/bin
+    remote_src: yes
+
+- name: Install filebrowser systemd unit
+  template:
+    src: templates/filebrowser.service.j2
+    dest: /etc/systemd/system/filebrowser.service
+
+- name: Run filebrowser systemd unit
+  systemd:
+    name: filebrowser
+    state: started
+    daemon_reload: yes
+    enabled: yes
+

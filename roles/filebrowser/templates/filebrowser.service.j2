@@ -1,0 +1,11 @@
+[Unit]
+Description=FileBrowser
+
+[Service]
+WorkingDirectory=/media/data/archive
+
+ExecStart=/usr/bin/filebrowser -p 40197
+Restart=Always
+
+[Install]
+Wants=network.target
