@@ -27,6 +27,7 @@
     - python-setuptools
     - python-pip
     - ssl-cert
+    - syncthing
     state: latest
     update_cache: yes
 
@@ -34,3 +35,9 @@
   pip:
     name: docker
     version: 2.7.0
+
+- name: Run filebrowser syncthing unit
+  systemd:
+    name: syncthing@root
+    state: started
+    enabled: yes
