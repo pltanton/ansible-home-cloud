@@ -36,8 +36,19 @@
     name: docker
     version: 2.7.0
 
-- name: Run filebrowser syncthing unit
+- name: Create storag egroup
+  group:
+    name: storage
+    gid: 1010
+
+- name: Create syncthing user
+  user:
+    name: syncthing
+    uid: 1040
+    groups: storage,www-data
+
+- name: Run syncthing unit
   systemd:
-    name: syncthing@root
+    name: syncthing@syncthing
     state: started
     enabled: yes
