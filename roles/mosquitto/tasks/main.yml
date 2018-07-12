@@ -4,11 +4,9 @@
   template:
     src: templates/mosquitto-acme.j2
     dest: /etc/nginx/sites-enabled/mosquitto-acme
+  notify: restart nginx
   vars:
     domain_name: "mqtt.kaliwe.ru"
-
-- name: Restart nginx
-  service: name=nginx state=restarted
 
 - name: Create letsencrypt certificate for mosquitto
   shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru
