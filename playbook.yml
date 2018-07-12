@@ -49,10 +49,20 @@
         letsencrypt_email: "plotnikovanton@gmail.com"
   
 - hosts: odroid2
+  tasks:
+  - hostname: { name: odroid2 }
   roles:
   - nextcloud
   - rtmp
   - filebrowser
+  - transmission
+  - elboletaire.transmission
     #- owntracks-recorder
-  tasks:
-  - hostname: { name: odroid2 }
+  vars:
+    transmission_password: Test
+    transmission_rpc_auth_required: true
+    transmission_rpc_whitelist_enabled: false
+    transmission_user: transmission
+    transmission_download_dir: /media/data/transmsission/downloads
+    transmission_watch_dir: /media/data/transmsission/torrents
+
