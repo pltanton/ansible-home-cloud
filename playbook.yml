@@ -59,7 +59,7 @@
   - elboletaire.transmission
     #- owntracks-recorder
   vars:
-    transmission_password: "{{ lookup('hashivault', 'home-cloud', 'torrent') }}"
+    transmission_password: "{{ lookup('hashi_vault', 'home-cloud', 'torrent') }}"
     transmission_rpc_auth_required: true
     transmission_rpc_whitelist_enabled: false
     transmission_user: transmission
