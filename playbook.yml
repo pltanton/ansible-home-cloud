@@ -2,6 +2,8 @@
   user: root
   roles: 
   - common
+  - { role: node-exporter-thermal-zone, tags: prometheus }
+
 
 - hosts: odroid1
   roles:
