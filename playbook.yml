@@ -4,6 +4,12 @@
   - common
   - { role: node-exporter-thermal-zone, tags: prometheus }
 
+- hosts: [odroid1, odroid2]
+  user: root
+  roles: 
+  - syncthing
+  - docker
+
 
 - hosts: odroid1
   roles:

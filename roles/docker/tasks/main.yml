@@ -1,0 +1,19 @@
+---
+- name: install docker packages
+  apt: 
+    package:
+    - docker.io
+    - python-setuptools
+    - python-pip
+    state: latest
+    update_cache: yes
+
+- name: install docker-py
+  pip:
+    name: docker
+    version: 2.7.0
+
+- name: create storag egroup
+  group:
+    name: storage
+    gid: 1010
