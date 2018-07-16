@@ -23,32 +23,7 @@
 - name: Install common packages
   apt: 
     package:
-    - docker.io
-    - python-setuptools
-    - python-pip
     - ssl-cert
-    - syncthing
     state: latest
     update_cache: yes
 
-- name: Install docker-py
-  pip:
-    name: docker
-    version: 2.7.0
-
-- name: Create storag egroup
-  group:
-    name: storage
-    gid: 1010
-
-- name: Create syncthing user
-  user:
-    name: syncthing
-    uid: 1040
-    groups: storage,www-data
-
-- name: Run syncthing unit
-  systemd:
-    name: syncthing@syncthing
-    state: started
-    enabled: yes

@@ -1,0 +1,19 @@
+- name: install syncthing package
+  apt: 
+    package:
+    - syncthing
+    state: latest
+    update_cache: yes
+
+- name: create syncthing user
+  user:
+    name: syncthing
+    uid: 1040
+    groups: storage,www-data
+
+- name: run syncthing unit
+  systemd:
+    name: syncthing@syncthing
+    state: started
+    enabled: yes
+
