@@ -23,6 +23,14 @@
       default:
         ssl: false
         letsencrypt: false
+      torrent.kaliwe.ru:
+        domains:
+        - torrent.kaliwe.ru
+        upstreams:
+        - { backend_address: 192.168.20.2, backend_port: 9091 }
+        letsencrypt: true
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
       hass.kaliwe.ru:
         domains:
         - hass.kaliwe.ru
