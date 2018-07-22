@@ -2,6 +2,7 @@
   user: root
   roles: 
   - common
+  - { role: node-exporter, tags: prometheus }
   - { role: node-exporter-thermal-zone, tags: prometheus }
 
 - hosts: [odroid1, odroid2]
@@ -10,12 +11,13 @@
   - syncthing
   - docker
 
-
 - hosts: odroid1
   roles:
-  - mosquitto
-  - home-assistant
-  - hispanico.letsencrypt-nginx-revproxy
+  - { role: mosquitto, tags: home-automation }
+  - { role: home-assistant, tags: home-automation }
+  - { role: hispanico.letsencrypt-nginx-revproxy, tags: nginx,home-automation }
+  - { role: prometheus, tags: prometheus }
+  - { role: grafana, tags: prometheus }
   tasks:
   - hostname: { name: odroid1 }
   vars:
@@ -28,6 +30,13 @@
         - torrent.kaliwe.ru
         upstreams:
         - { backend_address: 192.168.20.2, backend_port: 9091 }
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
+      grafana.kaliwe.ru:
+        domains:
+        - grafana.kaliwe.ru
+        upstreams:
+        - { backend_address: 127.0.0.1, backend_port: 3000 }
         letsencrypt: true
         ssl: false
         letsencrypt_email: "plotnikovanton@gmail.com"
@@ -69,13 +78,11 @@
   - hostname: { name: odroid2 }
   roles:
   - nextcloud
-  - rtmp
   - filebrowser
   - transmission
   - elboletaire.transmission
-    #- owntracks-recorder
   vars:
-    transmission_password: "{{ lookup('hashi_vault', 'home-cloud', 'torrent') }}"
+    transmission_password: "{{ lookup('hashi_vault', 'secret=secrect/home-cloud:torrent url=https://vault.kaliwe.ru:8200') }}"
     transmission_rpc_auth_required: true
     transmission_rpc_whitelist_enabled: false
     transmission_user: transmission
