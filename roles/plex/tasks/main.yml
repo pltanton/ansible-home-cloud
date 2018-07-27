@@ -1,0 +1,15 @@
+---
+
+- name: Install plex arm container
+  docker_container:
+    name: plex
+    image: lsioarmhf/plex
+    restart: yes
+    env: "{{ env }}"
+    network_mode: host
+    volumes:
+    - "{{ mounts.movies }}:/data/movies"
+    - "{{ mounts.config }}:/data/config"
+  tags: 
+    - start
+

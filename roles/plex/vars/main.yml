@@ -1,0 +1,9 @@
+env:
+  PUID: storage
+  PGID: storage
+
+mounts:
+  movies: /media/data/plex/movies
+  config: /media/data/plex/config
+  tvseries: /media/data/plex/tvseries
+  transcode: /media/data/plex/transcode

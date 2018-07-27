@@ -1,4 +1,13 @@
 ---
+- name: create storage group
+  group:
+    name: storage
+    gid: 1010
+
+- name: create storage group
+  user:
+    name: storage
+    uid: 1010
 
 - name: Find termite.terminfo
   find:

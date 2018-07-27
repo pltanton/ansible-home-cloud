@@ -53,7 +53,7 @@
         domains:
         - nextcloud.kaliwe.ru
         upstreams:
-        - { backend_address: 192.168.20.2, backend_port: 8080 }
+        - { backend_address: 192.168.20.2, backend_port: 8081 }
         letsencrypt: true
         ssl: false
         letsencrypt_email: "plotnikovanton@gmail.com"
@@ -73,6 +73,14 @@
         letsencrypt: true
         ssl: false
         letsencrypt_email: "plotnikovanton@gmail.com"
+      plex.kaliwe.ru:
+        domains:
+        - plex.kaliwe.ru
+        upstreams:
+        - { backend_address: 192.168.20.2, backend_port: 8080 }
+        letsencrypt: true
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
   
 - hosts: odroid2
   tasks:
@@ -80,13 +88,13 @@
   roles:
   - nextcloud
   - filebrowser
-  - transmission
   - elboletaire.transmission
+  - plex
   vars:
-    transmission_password: "{{ lookup('hashi_vault', 'secret=secrect/home-cloud:torrent url=https://vault.kaliwe.ru:8200') }}"
+    transmission_password: "{{ lookup('hashi_vault', 'secret=secret/home-cloud:torrent url=https://vault.kaliwe.ru:8200') }}"
     transmission_rpc_auth_required: true
     transmission_rpc_whitelist_enabled: false
-    transmission_user: transmission
+    transmission_user: storage
     transmission_download_dir: /media/data/transmsission/downloads
     transmission_watch_dir: /media/data/transmsission/torrents
 

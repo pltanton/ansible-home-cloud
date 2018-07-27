@@ -12,6 +12,8 @@
     env: "{{ env }}"
     volumes:
     - "/media/data/nextcloud/db:/var/lib/postgresql/data"
+  tags: 
+    - start
 
 - name: Install nextcloud in docker
   docker_container:
@@ -23,6 +25,8 @@
     links:
     - nextcloud-db
     env: "{{ env }}"
+  tags: 
+    - start
 
 - name: Install nextcloud-nginx in docker
   docker_container:
@@ -30,7 +34,7 @@
     image: arm32v7/nginx
     restart: yes
     ports:
-    - "8080:80"
+    - "8081:80"
     volumes:
     - "/media/data/nextcloud/config/nginx.conf:/etc/nginx/nginx.conf:ro"
     volumes_from:
@@ -38,3 +42,5 @@
     links:
     - nextcloud
     #env: "{{ env }}"
+  tags: 
+    - start

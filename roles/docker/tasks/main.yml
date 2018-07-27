@@ -12,8 +12,3 @@
   pip:
     name: docker
     version: 2.7.0
-
-- name: create storag egroup
-  group:
-    name: storage
-    gid: 1010

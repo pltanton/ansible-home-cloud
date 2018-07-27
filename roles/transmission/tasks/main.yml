@@ -1,7 +1,0 @@
----
-
-- name: Create transmission user
-  user:
-    name: transmission
-    group: storage
-

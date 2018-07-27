@@ -16,4 +16,5 @@
     name: syncthing@syncthing
     state: started
     enabled: yes
-
+  tags: 
+    - start

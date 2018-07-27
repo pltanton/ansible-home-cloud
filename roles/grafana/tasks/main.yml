@@ -9,4 +9,6 @@
     name: grafana-server
     state: started
     daemon_reload: yes
-    enabled: yes
+    enabled: no
+  tags: 
+    - start

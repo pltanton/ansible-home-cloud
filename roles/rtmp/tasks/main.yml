@@ -6,3 +6,5 @@
     restart: yes
     ports:
     - "1935:1935"
+  tags: 
+    - start

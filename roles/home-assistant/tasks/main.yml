@@ -15,3 +15,5 @@
     volumes:
     - "/etc/localtime:/etc/localtime:ro"
     - "/opt/home-assistant:/config"
+  tags: 
+    - start
