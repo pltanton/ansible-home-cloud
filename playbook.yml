@@ -15,7 +15,7 @@
   roles:
   - { role: mosquitto, tags: home-automation }
   - { role: home-assistant, tags: home-automation }
-  - { role: hispanico.letsencrypt-nginx-revproxy, tags: nginx,home-automation }
+  - { role: hispanico.nginx-revproxy, tags: nginx,home-automation }
   - { role: prometheus, tags: prometheus }
   - { role: grafana, tags: prometheus }
   tasks:
