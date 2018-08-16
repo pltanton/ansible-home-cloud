@@ -87,7 +87,7 @@
   - hostname: { name: odroid2 }
   roles:
   - nextcloud
-  - filebrowser
+  - { role: filebrowser, tags: filebrowser }
   - elboletaire.transmission
   - plex
   vars:

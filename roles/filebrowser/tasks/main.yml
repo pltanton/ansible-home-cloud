@@ -1,15 +1,16 @@
 ---
 
-- name: install filebrowser binary
-  unarchive:
-    src: https://github.com/filebrowser/filebrowser/releases/download/v1.7.0/linux-arm-filebrowser.tar.gz
-    dest: /usr/bin
-    remote_src: yes
-
 - name: install filebrowser systemd unit
   template:
     src: templates/filebrowser.service.j2
     dest: /etc/systemd/system/filebrowser.service
+
+- name: install filebrowser binary
+  unarchive:
+    src: https://github.com/filebrowser/filebrowser/releases/download/v1.10.0/linux-armv7-filebrowser.tar.gz
+    dest: /usr/bin
+    remote_src: yes
+  notify: restart filebrowser
 
 - name: run filebrowser systemd unit
   systemd:
