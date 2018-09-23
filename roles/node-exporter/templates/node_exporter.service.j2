@@ -2,4 +2,4 @@
 Description=Node Exporter
 
 [Service]
-ExecStart=/usr/bin/node_exporter
+ExecStart=/usr/bin/node_exporter --collector.textfile.directory /var/lib/node_exporter/textfile_collector 
