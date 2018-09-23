@@ -9,26 +9,6 @@
     name: storage
     uid: 1010
 
-- name: Find termite.terminfo
-  find:
-    path: /user/share/terminfo
-    pattern: termite
-  register: terminfo_find_result
-
-- name: Install termite.terminfo
-  vars:
-    terminfo_path: /tmp/termite.terminfo
-    terminfo_url: https://github.com/thestinger/termite/raw/master/termite.terminfo
-  block:
-  - get_url: 
-      url: terminfo_path
-      dest: terminfo_url
-  - command: tic -x terminfo_path
-  - file:
-      path: terminfo_path
-      state: absent
-  when: terminfo_find_result.matched > 0
-
 - name: Install common packages
   apt: 
     package:

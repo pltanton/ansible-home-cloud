@@ -3,3 +3,5 @@ env:
   POSTGRES_DB: nextcloud
   POSTGRES_USER: nextcloud
   POSTGRES_HOST: nextcloud-db
+
+nextcloud_data: /media/data/nextcloud

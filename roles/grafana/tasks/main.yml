@@ -1,14 +1,16 @@
 ---
 - name: install grafana deb
   apt:
-    deb: "https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_{{ grafana_version }}_armhf.deb"
+    deb: "https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_{{ grafana_version }}_{{ grafana_arch }}.deb"
   notify: restart grafana
+  tags:
+    - grafana
 
 - name: start and enable grafana service
   service:
     name: grafana-server
     state: started
     daemon_reload: yes
-    enabled: no
-  tags: 
-    - start
+    enabled: yes
+  tags:
+    - grafana

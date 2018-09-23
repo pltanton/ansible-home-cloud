@@ -1,36 +1,57 @@
 ---
 
-- name: Install nginx site for letsencrypt requests for mosquitto
+- name: install certbot
+  get_url:
+    url: https://dl.eff.org/certbot-auto
+    dest: /usr/bin/certbot-auto
+    mode: "a+x"
+  tags:
+    - mosquitto
+
+- name: create directroy for acme
+  file:
+    path: "{{ mosquitto_acme_dir }}"
+    state: directory
+    owner: www-data
+    group: www-data
+  tags:
+    - mosquitto
+
+- name: install nginx site for letsencrypt requests for mosquitto
   template:
     src: templates/mosquitto-acme.j2
     dest: /etc/nginx/sites-enabled/mosquitto-acme
   notify: restart nginx
-  vars:
-    domain_name: "mqtt.kaliwe.ru"
+  tags:
+    - mosquitto
 
-- name: Create letsencrypt certificate for mosquitto
-  shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru
+- name: create letsencrypt certificate for mosquitto
+  shell: "letsencrypt certonly -n --webroot -w {{ mosquitto_acme_dir }} -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru"
   args:
     creates: /etc/letsencrypt/live/mqtt.kaliwe.ru
+  tags:
+    - mosquitto
 
-- name: Add letsencrypt cronjob for cert renewal for mosquitto
+- name: add letsencrypt cronjob for cert renewal for mosquitto
   cron:
     name: letsencrypt_renewal
     special_time: weekly
-    job: letsencrypt --renew certonly -n --webroot -w /var/www/letsencrypt -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru && systemctl restart mosquitto
+    job: "letsencrypt --renew certonly -n --webroot -w {{ mosquitto_acme_dir }} -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru && systemctl restart mosquitto"
+  tags:
+    - mosquitto
 
-- name: Install mosquitto
+- name: install mosquitto
   apt: 
     package: mosquitto
     state: latest
     update_cache: yes
+  tags:
+    - mosquitto
 
-- name: Configure mosquitto
+- name: configure mosquitto
   template:
     src: templates/mosquitto.conf.j2
     dest: /etc/mosquitto/mosquitto.conf
-
-- name: Restart mosquitto
-  service: name=mosquitto state=restarted
-  tags: 
-    - start
+  notify: restart mosquitto
+  tags:
+    - mosquitto

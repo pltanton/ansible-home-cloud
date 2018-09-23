@@ -4,17 +4,21 @@
     - syncthing
     state: latest
     update_cache: yes
+  tags:
+    - syncthing
 
 - name: create syncthing user
   user:
     name: syncthing
     uid: 1040
     groups: storage,www-data
+  tags:
+    - syncthing
 
 - name: run syncthing unit
   systemd:
     name: syncthing@syncthing
     state: started
     enabled: yes
-  tags: 
-    - start
+  tags:
+    - syncthing

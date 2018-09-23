@@ -3,10 +3,14 @@
   file:
     state: directory
     path: /var/lib/node_exporter/textfile_collector
+  tags:
+    - thermal-zone-exporter
 
 - name: cron task to expose thermal zone
   cron:
     name: expose thermal zones to file-exporter
     minute: "*/1"
     job: 'for i in $(seq 0 $(expr $(ls /sys/class/thermal | grep thermal_zone | wc -l) - 1)); do echo "node_thermal_zone{id=\"$i\"} $(cat /sys/class/thermal/thermal_zone$i/temp)"; done > /var/lib/node_exporter/textfile_collector/node_thermal_zone.prom'
+  tags:
+    - thermal-zone-exporter
 

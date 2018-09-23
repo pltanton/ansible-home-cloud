@@ -4,20 +4,24 @@
   template:
     src: templates/filebrowser.service.j2
     dest: /etc/systemd/system/filebrowser.service
+  tags:
+    - filebrowser
 
 - name: install filebrowser binary
   unarchive:
-    src: https://github.com/filebrowser/filebrowser/releases/download/v1.10.0/linux-armv7-filebrowser.tar.gz
+    src: "https://github.com/filebrowser/filebrowser/releases/download/{{ filebrowser_version }}/linux-{{ filebrowser_arch }}-filebrowser.tar.gz"
     dest: /usr/bin
     remote_src: yes
   notify: restart filebrowser
+  tags:
+    - filebrowser
 
 - name: run filebrowser systemd unit
   systemd:
     name: filebrowser
     state: started
     daemon_reload: yes
-    enabled: no
+    enabled: yes
   tags:
-    - start
+    - filebrowser
 

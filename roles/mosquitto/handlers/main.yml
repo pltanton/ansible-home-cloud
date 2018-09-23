@@ -2,3 +2,9 @@
   service:
     name: nginx
     state: restarted
+
+- name: restart mosquitto service
+  service:
+    name: mosquitto
+    state: restarted
+    enable: yes

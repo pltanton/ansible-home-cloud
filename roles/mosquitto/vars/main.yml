@@ -1,0 +1,2 @@
+mosquitto_acme_dir: /var/www/mosquitto
+mosquitto_domain_name: "mqtt.kaliwe.ru"

@@ -1,9 +1,9 @@
 server {
     listen 80;
-    server_name {{ domain_name }};
+    server_name {{ mosquitto_domain_name }};
 
     location /.well-known/acme-challenge {
-        root /var/www/letsencrypt;
+        root {{ mosquitto_acme_dir }};
         try_files $uri $uri/ =404;
     }
 }
