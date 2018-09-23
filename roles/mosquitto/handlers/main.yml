@@ -7,4 +7,3 @@
   service:
     name: mosquitto
     state: restarted
-    enable: yes

@@ -55,3 +55,12 @@
   notify: restart mosquitto
   tags:
     - mosquitto
+
+- name: start and enable mosquitto service
+  systemd:
+    name: mosquitto
+    state: started
+    daemon_reload: yes
+    enabled: yes
+  tags:
+    - mosquitto
