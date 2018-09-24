@@ -1,3 +1,3 @@
-path "secret/home-cloud" {
+path "secret/home-cloud/luks/*" {
   capabilities = ["read"]
 }

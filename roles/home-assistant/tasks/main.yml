@@ -14,6 +14,7 @@
     image: homeassistant/raspberrypi3-homeassistant:latest
     network_mode: host
     restart: yes
+    restart_policy: always
     volumes:
     - "/etc/localtime:/etc/localtime:ro"
     - "/opt/home-assistant:/config"

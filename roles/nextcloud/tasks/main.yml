@@ -11,6 +11,7 @@
     name: nextcloud-db
     image: postgres
     restart: yes
+    restart_policy: always
     env: "{{ env }}"
     volumes:
     - "{{ nextcloud_data }}/db:/var/lib/postgresql/data"
@@ -22,6 +23,7 @@
     name: nextcloud
     image: arm32v7/nextcloud:fpm
     restart: yes
+    restart_policy: always
     volumes:
       - "{{ nextcloud_data }}:/var/www/html"
     links:
@@ -35,6 +37,7 @@
     name: nextcloud-nginx
     image: arm32v7/nginx
     restart: yes
+    restart_policy: always
     ports:
       - "8080:80"
     volumes:

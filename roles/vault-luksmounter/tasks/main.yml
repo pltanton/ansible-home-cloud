@@ -1,0 +1,43 @@
+---
+- name: install required packages
+  apt: 
+    package:
+      - curl
+      - jq
+    state: latest
+  tags: 
+    - luksmounter
+
+- name: copy luksmounter script
+  template:
+    src: files/luksmounter.sh
+    dest: /bin/luksmounter.sh
+    mode: '0700'
+  tags: 
+    - luksmounter
+
+- name: copy luksmounter env
+  template:
+    src: templates/luksmounter_env.j2
+    dest: /etc/luksmounter_env
+  tags: 
+    - luksmounter
+
+- name: copy luksmounter service
+  template:
+    src: templates/luksmounter.service.j2
+    dest: /etc/systemd/system/luksmounter.service
+  vars:
+    - luksmounter_target: /dev/sda1
+    - luksmounter_name: data
+    - luksmounter_mount_point: /media/data
+  tags: 
+    - luksmounter
+
+- name: enable luksmounter service
+  systemd:
+    name: luksmounter
+    daemon_reload: yes
+    enabled: yes
+  tags:
+    - luksmounter

@@ -5,6 +5,7 @@
     name: plex
     image: lsioarmhf/plex
     restart: yes
+    restart_policy: always
     env: "{{ env }}"
     network_mode: host
     volumes:

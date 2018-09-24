@@ -6,6 +6,7 @@
   - common
   - { role: node-exporter, tags: monitoring }
   - { role: node-exporter-thermal-zone, tags: monitoring }
+  - vault-luksmounter
 
 - hosts: odroid1
   roles:

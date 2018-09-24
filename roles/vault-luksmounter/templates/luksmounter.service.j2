@@ -1,0 +1,19 @@
+[Unit]
+Description=Mountes luks partition by vault key
+DefaultDependencies=no
+After=systemd-networkd-wait-online.service
+After=networking.service
+Before=network-online.target
+Before=docker.service
+Before=transmission-daemon.service
+Before=filebrowser.service
+
+[Service]
+Type=oneshot
+KillMode=none
+ExecStart=/bin/luksmounter.sh {{ luksmounter_target }} {{ luksmounter_name }} {{ luksmounter_mount_point }}
+TimeoutSec=0
+EnvironmentFile=/etc/luksmounter_env
+
+[Install]
+WantedBy=multi-user.target
