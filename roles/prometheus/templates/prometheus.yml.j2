@@ -3,5 +3,11 @@ scrape_configs:
   scrape_interval: 3s
 
   static_configs:
-  - targets: ['192.168.20.1:9100', '192.168.20.2:9100', 'hz1.kaliwe.ru:9100']
+  - targets: ['hz1.kaliwe.ru:9100']
+
+- job_name: 'home-cloud'
+  scrape_interval: 3s
+
+  static_configs:
+  - targets: ['192.168.20.1:9100', '192.168.20.2:9100']
 
