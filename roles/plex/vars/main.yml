@@ -3,6 +3,9 @@ env:
   PGID: storage
 
 mounts:
+  torrent:
+    movies: /media/data/torrent/downloads/movies
+    tvshows: /media/data/torrent/downloads/tvshows
   movies: /media/data/plex/movies
   config: /media/data/plex/config
   tvseries: /media/data/plex/tvseries

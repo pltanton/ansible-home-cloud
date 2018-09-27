@@ -22,6 +22,14 @@
       default:
         ssl: false
         letsencrypt: false
+      monitorrent.kaliwe.ru:
+        domains:
+        - monitorrent.kaliwe.ru
+        upstreams:
+        - { backend_address: 192.168.20.2, backend_port: 6687 }
+        letsencrypt: true
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
       torrent.kaliwe.ru:
         domains:
         - torrent.kaliwe.ru
@@ -85,14 +93,6 @@
   roles:
     - { role: nextcloud }
     - { role: filebrowser }
-    - elboletaire.transmission
     - plex
-  vars:
-    #transmission_password: "{{ lookup('hashi_vault', 'secret=secret/home-cloud:torrent url=https://vault.kaliwe.ru:8200') }}"
-    transmission_password: g9GvwLrjwwURKoKzX2tUTqcbx
-    transmission_rpc_auth_required: true
-    transmission_rpc_whitelist_enabled: false
-    transmission_user: storage
-    transmission_download_dir: /media/data/transmsission/downloads
-    transmission_watch_dir: /media/data/transmsission/torrents
+    - torrent
 

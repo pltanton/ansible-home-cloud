@@ -1,0 +1,92 @@
+---
+
+- name: create torrent directories
+
+  file:
+    path: "{{ torrent_root }}/{{ item }}"
+    state: directory
+    owner: storage
+    group: storage
+  with_items: [downloads, watch, config, monitorrent, custom-theme]
+  tags: 
+    - torrent
+    - monitorrent
+    - transmission
+
+- name: get transmission custom theme
+  unarchive:
+    src: "https://github.com/nosmokingbandit/Transmission-Web-UI/archive/master.zip"
+    remote_src: yes
+    dest: "{{ torrent_root }}/custom-theme"
+  tags: 
+    - torrent
+    - transmission
+
+- name: install transmission in docker
+  docker_container:
+    name: transmission
+    image: "lsioarmhf/transmission"
+    restart_policy: always
+    network_mode: host
+    volumes:
+      - "{{ torrent_root }}/downloads:/downloads"
+      - "{{ torrent_root }}/watch:/watch"
+      - "{{ torrent_root }}/config:/config"
+      - "{{ torrent_root }}/custom-theme/Transmission-Web-UI-master/web:/usr/share/transmission/web"
+    env:
+      PGID: 1010
+      PUID: 1010
+  tags: 
+    - torrent
+    - transmission
+
+- name: stop transmission before setting config
+  docker_container:
+    name: transmission
+    state: stopped
+  tags: 
+    - torrent
+    - transmission
+
+- name: set transmission config
+  lineinfile:
+    path: "{{ torrent_root }}/config/settings.json"
+    regexp: "\"{{ item.key }}\":"
+    line: "\"{{ item.key }}\": \"{{ item.value }}\","
+  with_items:
+    - { key: rpc-username, value: admin }
+    - { key: rpc-password, value: g9GvwLrjwwURKoKzX2tUTqcbx }
+    - { key: rpc-authentication-required, value: "true" }
+  tags: 
+    - torrent
+    - transmission
+
+- name: start transmission after setting config
+  docker_container:
+    name: transmission
+    state: started
+  tags: 
+    - torrent
+    - transmission
+
+- name: create monitorrent db file
+  file:
+    path: "{{ torrent_root }}/monitorrent/monitorrent.db"
+    state: touch
+  tags: 
+    - torrent
+    - monitorrent
+
+- name: install monitorrent arm container (exposes 6687)
+  docker_container:
+    name: monitorrent
+    image: "werwolfby/armhf-alpine-monitorrent:{{ monitorrent_version }}"
+    restart: yes
+    restart_policy: always
+    network_mode: host
+    volumes:
+    - "{{ torrent_root }}/monitorrent/monitorrent.db:/var/www/monitorrent/monitorrent.db"
+  tags: 
+    - torrent
+    - monitorrent
+
