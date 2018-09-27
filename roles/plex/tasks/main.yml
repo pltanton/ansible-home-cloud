@@ -8,9 +8,9 @@
     env: "{{ env }}"
     network_mode: host
     volumes:
-    - "{{ mounts.torrent.movies }}:/data/torrent/movies"
-    - "{{ mounts.torrent.tvshows }}:/data/torrent/tvshows"
-    - "{{ mounts.movies }}:/data/movies"
+    - "{{ mounts.torrent.movies }}:/media/data/torrent/movies"
+    - "{{ mounts.torrent.tvshows }}:/media/data/torrent/tvshows"
+    - "{{ mounts.transcode }}:/transcode"
     - "{{ mounts.config }}:/config"
   tags: 
     - plex
