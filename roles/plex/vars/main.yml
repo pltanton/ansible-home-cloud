@@ -4,7 +4,7 @@ env:
 
 mounts:
   torrent:
-    movies: /media/data/torrent/downloads/movies
-    tvshows: /media/data/torrent/downloads/tvshows
-  transcode: /media/data/plex/transcode
-  config: /media/data/plex/config
+    movies: /media/public/torrent/downloads/movies
+    tvshows: /media/public/torrent/downloads/tvshows
+  transcode: /media/public/plex/transcode
+  config: /media/public/plex/config
