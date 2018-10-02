@@ -1,5 +1,10 @@
+# vim: ft=dosini
 [Unit]
 Description=Node Exporter
 
 [Service]
 ExecStart=/usr/bin/node_exporter --collector.textfile.directory /var/lib/node_exporter/textfile_collector 
+
+[Install]
+Wants=network.target
+WantedBy=multi-user.target

@@ -3,5 +3,7 @@ env:
   POSTGRES_DB: nextcloud
   POSTGRES_USER: nextcloud
   POSTGRES_HOST: nextcloud-db
+  PGID: 1040
+  PUID: 1040
 
-nextcloud_data: /media/data/nextcloud
+nextcloud_root: /media/data/cloud

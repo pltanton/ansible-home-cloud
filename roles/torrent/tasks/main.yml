@@ -55,7 +55,7 @@
     line: "\"{{ item.key }}\": \"{{ item.value }}\","
   with_items:
     - { key: rpc-username, value: admin }
-    - { key: rpc-password, value: g9GvwLrjwwURKoKzX2tUTqcbx }
+    - { key: rpc-password, value: "{{ torrent_password }}" }
     - { key: rpc-authentication-required, value: "true" }
   tags: 
     - torrent
