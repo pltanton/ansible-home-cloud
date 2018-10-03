@@ -4,6 +4,7 @@ Description=FileBrowser
 
 [Service]
 WorkingDirectory=/media/data/archive
+User=syncthing
 
 ExecStart=/usr/bin/filebrowser -p 40197
 Restart=Always

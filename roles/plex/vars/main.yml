@@ -1,6 +1,6 @@
 env:
-  PUID: storage
-  PGID: storage
+  PUID: 1010
+  PGID: 1010
 
 mounts:
   torrent:
