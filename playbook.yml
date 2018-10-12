@@ -20,6 +20,14 @@
       default:
         ssl: false
         letsencrypt: false
+      flexget.kaliwe.ru:
+        domains:
+        - flexget.kaliwe.ru
+        upstreams:
+        - { backend_address: 192.168.20.2, backend_port: 5050 }
+        letsencrypt: true
+        ssl: false
+        letsencrypt_email: "plotnikovanton@gmail.com"
       monitorrent.kaliwe.ru:
         domains:
         - monitorrent.kaliwe.ru

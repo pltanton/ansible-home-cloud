@@ -13,9 +13,20 @@
     - monitorrent
     - transmission
 
+- name: install transmission telegram notification script
+  template:
+    src: templates/transmission-telegram-notification.sh.j2
+    dest: "{{ torrent_root }}/config/tg-notify.sh"
+    mode: 0744
+    owner: storage
+    group: storage
+  tags:
+    - torrent
+    - transmission
+
 - name: get transmission custom theme
   unarchive:
-    src: "https://github.com/nosmokingbandit/Transmission-Web-UI/archive/master.zip"
+    src: "https://github.com/Secretmapper/combustion/archive/release.zip"
     remote_src: yes
     dest: "{{ torrent_root }}/custom-theme"
   tags: 
@@ -32,7 +43,7 @@
       - "{{ torrent_root }}/downloads:/downloads"
       - "{{ torrent_root }}/watch:/watch"
       - "{{ torrent_root }}/config:/config"
-      - "{{ torrent_root }}/custom-theme/Transmission-Web-UI-master/web:/usr/share/transmission/web"
+      - "{{ torrent_root }}/custom-theme/combustion-release:/usr/share/transmission/web"
     env:
       PGID: 1010
       PUID: 1010
@@ -57,6 +68,8 @@
     - { key: rpc-username, value: admin }
     - { key: rpc-password, value: "{{ torrent_password }}" }
     - { key: rpc-authentication-required, value: "true" }
+    - { key: script-torrent-done-enabled, value: "true" }
+    - { key: script-torrent-done-filename, value: "/config/tg-notify.sh" }
   tags: 
     - torrent
     - transmission

@@ -1,0 +1,5 @@
+# vim: ft=sh
+
+text="Download torrent complete: $TR_TORRENT_NAME"
+
+curl --data chat_id={{ tg_chat_id }} --data-urlencode "text=$text" "https://api.telegram.org/bot{{ tg_bot_token }}/sendMessage"
