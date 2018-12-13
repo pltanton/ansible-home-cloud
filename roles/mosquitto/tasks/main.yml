@@ -36,7 +36,7 @@
   cron:
     name: letsencrypt_renewal
     special_time: weekly
-    job: "letsencrypt --renew certonly -n --webroot -w {{ mosquitto_acme_dir }} -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru && systemctl restart mosquitto"
+    job: "letsencrypt certonly -n --webroot -w {{ mosquitto_acme_dir }} -m plotnikovanton@gmail.com --agree-tos -d mqtt.kaliwe.ru && systemctl restart mosquitto"
   tags:
     - mosquitto
 
