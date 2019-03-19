@@ -11,7 +11,7 @@
 - name: install home asistant in docker
   docker_container:
     name: home-assistant
-    image: homeassistant/raspberrypi3-homeassistant:0.78.3
+    image: homeassistant/raspberrypi3-homeassistant:0.88.2
     network_mode: host
     restart_policy: always
     volumes:

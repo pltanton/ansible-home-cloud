@@ -1,4 +1,4 @@
-monitorrent_version: 1.1.6
+monitorrent_version: 1.1.8
 torrent_password: "{{ lookup('hashi_vault', 'secret=secret/home-cloud/torrent/password:value') }}"
 tg_chat_id: "{{ lookup('hashi_vault', 'secret=secret/home-cloud/notify/tg-chat-id:value') }}"
 tg_bot_token: "{{ lookup('hashi_vault', 'secret=secret/home-cloud/notify/tg-bot-token:value') }}"
