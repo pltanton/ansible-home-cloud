@@ -8,7 +8,7 @@
     owner: storage
     group: storage
   with_items: [downloads, watch, config, monitorrent, custom-theme]
-  tags: 
+  tags:
     - torrent
     - monitorrent
     - transmission
@@ -29,7 +29,7 @@
     src: "https://github.com/Secretmapper/combustion/archive/release.zip"
     remote_src: yes
     dest: "{{ torrent_root }}/custom-theme"
-  tags: 
+  tags:
     - torrent
     - transmission
 
@@ -45,9 +45,9 @@
       - "{{ torrent_root }}/config:/config"
       - "{{ torrent_root }}/custom-theme/combustion-release:/usr/share/transmission/web"
     env:
-      PGID: 1010
-      PUID: 1010
-  tags: 
+      PGID: "1010"
+      PUID: "1010"
+  tags:
     - torrent
     - transmission
 
@@ -55,7 +55,7 @@
   docker_container:
     name: transmission
     state: stopped
-  tags: 
+  tags:
     - torrent
     - transmission
 
@@ -70,7 +70,7 @@
     - { key: rpc-authentication-required, value: "true" }
     - { key: script-torrent-done-enabled, value: "true" }
     - { key: script-torrent-done-filename, value: "/config/tg-notify.sh" }
-  tags: 
+  tags:
     - torrent
     - transmission
 
@@ -78,7 +78,7 @@
   docker_container:
     name: transmission
     state: started
-  tags: 
+  tags:
     - torrent
     - transmission
 
@@ -86,7 +86,7 @@
   file:
     path: "{{ torrent_root }}/monitorrent/monitorrent.db"
     state: touch
-  tags: 
+  tags:
     - torrent
     - monitorrent
 
@@ -99,7 +99,7 @@
     network_mode: host
     volumes:
     - "{{ torrent_root }}/monitorrent/monitorrent.db:/var/www/monitorrent/monitorrent.db"
-  tags: 
+  tags:
     - torrent
     - monitorrent
 

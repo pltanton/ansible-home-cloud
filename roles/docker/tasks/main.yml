@@ -1,8 +1,20 @@
 ---
+- name: add docker apt-key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: add docker deb repository
+  apt_repository:
+    repo: deb [arch=armhf] https://download.docker.com/linux/debian stretch stable
+    state: present
+
 - name: install docker packages
-  apt: 
+  apt:
     package:
-    - docker.io
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
     - python-setuptools
     - python-pip
     state: latest

@@ -1,0 +1,16 @@
+- name: add jellyfin apt-key
+  apt_key:
+    url: https://repo.jellyfin.org/debian/jellyfin_team.gpg.key
+    state: present
+
+- name: add jellyfin deb repository
+  apt_repository:
+    repo: deb [arch=armhf] https://repo.jellyfin.org/debian stretch main
+    state: present
+
+- name: install jellyfin package
+  apt:
+    package:
+    - jellyfin
+    state: latest
+    update_cache: yes

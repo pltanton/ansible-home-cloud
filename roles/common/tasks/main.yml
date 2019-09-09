@@ -10,7 +10,7 @@
     uid: 1010
 
 - name: Install common packages
-  apt: 
+  apt:
     package:
     - ssl-cert
     state: latest

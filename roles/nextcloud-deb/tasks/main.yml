@@ -1,0 +1,8 @@
+- name: install nextcloud package
+  apt:
+    package:
+    - syncthing
+    state: latest
+    update_cache: yes
+  tags:
+    - nextcloud-deb

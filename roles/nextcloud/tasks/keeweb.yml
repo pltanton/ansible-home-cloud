@@ -1,0 +1,36 @@
+---
+- name: find current version of keeweb
+  stat:
+    path: "{{ nextcloud_keeweb_dir }}/keeweb/.version_{{ nextcloud_keeweb_version }}"
+  register: keeweb_ver_file
+  tags:
+    - nextcloud-keeweb
+
+- name: remove previous keeweb instalation
+  file:
+    path: "{{ nextcloud_keeweb_dir }}/keeweb"
+    state: absent
+  tags:
+    - nextcloud-keeweb
+  when: "not keeweb_ver_file.stat.exists"
+
+- name: install new keeweb
+  unarchive:
+    src: "https://github.com/jhass/nextcloud-keeweb/releases/download/v{{ nextcloud_keeweb_version }}/keeweb-{{ nextcloud_keeweb_version }}.tar.gz"
+    dest: "{{ nextcloud_keeweb_dir }}"
+    remote_src: yes
+    owner: syncthing
+    group: syncthing
+  when: "not keeweb_ver_file.stat.exists"
+  tags:
+    - nextcloud-keeweb
+
+- name: save keeweb version
+  file:
+    path: "{{ nextcloud_keeweb_dir }}/keeweb/.version_{{ nextcloud_keeweb_version }}"
+    state: touch
+    owner: syncthing
+    group: syncthing
+  when: "not keeweb_ver_file.stat.exists"
+  tags:
+    - nextcloud-keeweb

@@ -2,7 +2,7 @@
 - name: install nextcloud-db in docker
   docker_container:
     name: nextcloud-db
-    image: postgres
+    image: postgres:10
     restart_policy: always
     env: "{{ env }}"
     volumes:
@@ -27,3 +27,5 @@
       - "nextcloud-db"
   tags:
     - nextcloud
+
+- import_tasks: ./keeweb.yml
