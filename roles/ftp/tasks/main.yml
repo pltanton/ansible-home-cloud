@@ -1,0 +1,7 @@
+- name: install ftp package
+  apt:
+    package:
+    - nfs-kernel-server
+    - nfs-common
+    state: latest
+    update_cache: yes

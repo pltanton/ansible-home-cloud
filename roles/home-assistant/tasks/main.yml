@@ -5,17 +5,17 @@
     repo: https://github.com/pltanton/home-assistant-config.git
     update: no
     dest: /opt/home-assistant
-  tags: 
+  tags:
     - hass
 
 - name: install home asistant in docker
   docker_container:
     name: home-assistant
-    image: homeassistant/raspberrypi3-homeassistant:0.88.2
+    image: homeassistant/raspberrypi3-homeassistant:0.100.3
     network_mode: host
     restart_policy: always
     volumes:
     - "/etc/localtime:/etc/localtime:ro"
     - "/opt/home-assistant:/config"
-  tags: 
+  tags:
     - hass

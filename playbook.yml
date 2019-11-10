@@ -95,5 +95,6 @@
   - { role: filebrowser, tags: [filebrowser, homecloud] }
   - { role: torrent, tags: [torrent, mediaserver] }
   - { role: jellyfin, tags: [jellyfin, mediaserver] }
+  - { role: ftp, tags: [ftp, mediaserver] }
 #   - { role: kerberos }
 
