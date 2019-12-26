@@ -1,0 +1,10 @@
+- name: install postgresql package
+  apt:
+    package:
+    - postgresql
+    - postgresql-contrib
+    - python-psycopg2
+    state: latest
+    update_cache: yes
+  tags:
+  - postgresql

@@ -1,5 +1,19 @@
 ---
 
+- name: create database
+  postgresql_db:
+    name: homeassistant
+  tags:
+    - hass-db
+
+- name: create database user
+  postgresql_user:
+    db: homeassistant
+    user: homeassistant
+    password: "{{ lookup('hashi_vault', 'secret=kv/home-cloud/hass:database') }}"
+  tags:
+    - hass-db
+
 - name: clone config
   git:
     repo: https://github.com/pltanton/home-assistant-config.git

@@ -16,3 +16,8 @@
     state: latest
     update_cache: yes
 
+- name: Chmod ssl
+  file:
+    path: '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+    mode: '0644'
+
