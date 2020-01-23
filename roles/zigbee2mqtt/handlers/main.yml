@@ -1,0 +1,14 @@
+- name: restart zigbee2mqtt
+  docker_container:
+    name: zigbee2mqtt
+    network_mode: host
+    restart_policy: always
+    volumes:
+    - "/opt/zigbee2mqtt:/app/data"
+    - "/run/udev:/run/udev:ro"
+    env:
+      TZ: "Europe/Moscow"
+    devices:
+    - "/dev/ttyACM0:/dev/ttyACM0"
+    privileged: yes
+    restart: yes
